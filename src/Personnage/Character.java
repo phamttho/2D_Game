@@ -1,6 +1,7 @@
 package Personnage;
 
 import Background.Map;
+import Background.Map2;
 public class Character {
     private String name;
     private int health;
@@ -9,9 +10,9 @@ public class Character {
     private int y;
     private int mapWidth;
     private int mapHeight;
-    private Map map;
+    private Object map; // Use Object to accept any map type
 
-    public Character(String name, int mapWidth, int mapHeight, Map map) {
+    public Character(String name, int mapWidth, int mapHeight, Object map) {
         this.name = name;
         this.health = 100; // Example health
         this.power = 10;   // Example power
@@ -59,31 +60,45 @@ public class Character {
     }
 
     public void moveUp() {
-        if (y > 0 && map.isWalkable(x, y - 1)) {
+        if (y > 0 && isWalkable(x, y - 1)) {
             y--;
         }
     }
 
     public void moveDown() {
-        if (y < mapHeight - 1 && map.isWalkable(x, y + 1)) {
+        if (y < mapHeight - 1 && isWalkable(x, y + 1)) {
             y++;
         }
     }
 
     public void moveLeft() {
-        if (x > 0 && map.isWalkable(x - 1, y)) {
+        if (x > 0 && isWalkable(x - 1, y)) {
             x--;
         }
     }
 
     public void moveRight() {
-        if (x < mapWidth - 1 && map.isWalkable(x + 1, y)) {
+        if (x < mapWidth - 1 && isWalkable(x + 1, y)) {
             x++;
         }
     }
 
+    private boolean isWalkable(int x, int y) {
+        if (map instanceof Map) {
+            return ((Map) map).isWalkable(x, y);
+        } else if (map instanceof Map2) {
+            return ((Map2) map).isWalkable(x, y);
+        }
+        return false;
+    }
+
     public boolean isAtDoor() {
-        return map.isDoor(x, y);
+        if (map instanceof Map) {
+            return ((Map) map).isDoor(x, y);
+        } else if (map instanceof Map2) {
+            return ((Map2) map).isDoor(x, y);
+        }
+        return false;
     }
 
     // Example actions

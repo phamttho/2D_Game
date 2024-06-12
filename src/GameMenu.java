@@ -4,14 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameMenu extends JFrame {
-    private Image backgroundImage;
+    private final Image backgroundImage;
 
     public GameMenu(String imagePath) {
         // Load background image
         backgroundImage = new ImageIcon(imagePath).getImage();
 
         // Set up the frame
-        setTitle("Game Menu");
+        setTitle("2DGame");
+        setSize(800, 400);
+        setResizable(true);
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -34,7 +36,7 @@ public class GameMenu extends JFrame {
 
         // Set button bounds (x, y, width, height)
         int buttonWidth = 200;
-        int buttonHeight = 50;
+        int buttonHeight = 30;
         int centerX = (Toolkit.getDefaultToolkit().getScreenSize().width - buttonWidth) / 2;
         int centerY = (Toolkit.getDefaultToolkit().getScreenSize().height) / 2;
 
@@ -50,28 +52,11 @@ public class GameMenu extends JFrame {
         backgroundPanel.add(settingsButton);
 
         // Set up button actions (you can customize these as needed)
-        introductionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Introduction Page");
-            }
-        });
+        introductionButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Introduction Page"));
 
-        howToPlayButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "How to Play Page");
-            }
-        });
+        howToPlayButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "How to Play Page"));
 
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Start the battle game
-                new BattleGame().setVisible(true);
-                dispose(); // Close the menu window
-            }
-        });
+        startButton.addActionListener(this::actionPerformed);
 
         settingsButton.addActionListener(new ActionListener() {
             @Override
@@ -93,5 +78,11 @@ public class GameMenu extends JFrame {
                 new GameMenu(imagePath).setVisible(true);
             }
         });
+    }
+
+    private void actionPerformed(ActionEvent e) {
+        // Start the battle game
+        new BattleGame().setVisible(true);
+        dispose(); // Close the menu window
     }
 }
