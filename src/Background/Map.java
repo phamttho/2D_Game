@@ -16,6 +16,7 @@ public class Map implements ImageObserver {
     private final Image ImgStrawbery;
     private final Image BackgroundMap1;
     private final Image Bricks;
+    private final Image Door1;
 
     public Map(int[][] predefinedMap ,Character mainCharacter, int tileSize) {
         this.width = predefinedMap.length;
@@ -26,6 +27,7 @@ public class Map implements ImageObserver {
         this.ImgStrawbery = new ImageIcon("src/strawbery.png").getImage(); // Update the path to your image
         this.BackgroundMap1 = new ImageIcon("src/MapBackground.png").getImage();
         this.Bricks = new ImageIcon("src/bricks.png").getImage();
+        this.Door1 = new ImageIcon("src/door1.png").getImage();
     }
 
 
@@ -60,8 +62,7 @@ public class Map implements ImageObserver {
 //                    g.setColor(Color.BLUE);
 //                    g.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
                 } else if (map[i][j] == 2) {
-                    g.setColor(Color.YELLOW);
-                    g.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
+                    g.drawImage(Door1, i * tileSize, j * tileSize, tileSize, tileSize, this);
                 } else if (map[i][j] == 3) {
                     g.drawImage(ImgStrawbery, i * tileSize, j * tileSize, tileSize, tileSize, this);
                 } else if (map[i][j] == 4) {
