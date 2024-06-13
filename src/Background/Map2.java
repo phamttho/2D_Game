@@ -46,6 +46,9 @@ public class Map2 implements ImageObserver {
 
     public boolean isObject(int x, int y) {
         return map2[x][y] != 3;}
+    public boolean isWinner(int x, int y) {
+        return map2[x][y] == 4;
+    }
 
     public void draw2(Graphics g) {
         for (int i = 0; i < width; i++) {
@@ -57,9 +60,12 @@ public class Map2 implements ImageObserver {
                 } else if (map2[i][j] == 2) {
                     g.setColor(Color.YELLOW);
                     g.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
-                }  else if (map2[i][j] == 3)
+                }  else if (map2[i][j] == 3) {
                     g.drawImage(ImgStrawbery, i * tileSize, j * tileSize, tileSize, tileSize, this);
-                else if (map2[i][j] == 0) {
+                }else if (map2[i][j] == 4) {
+                    g.setColor(Color.RED);
+                    g.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
+                }else if (map2[i][j] == 0) {
                     g.drawImage(BackgroundMap1, i* tileSize, j * tileSize, tileSize, tileSize, this);
                 }else {
                     g.setColor(Color.LIGHT_GRAY);

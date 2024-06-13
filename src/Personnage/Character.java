@@ -101,6 +101,15 @@ public class Character {
         return false;
     }
 
+    public boolean isTheWinner() {
+        if (map instanceof Map) {
+            return ((Map) map).isWinner(x, y);
+        } else if (map instanceof Map2) {
+            return ((Map2) map).isWinner(x, y);
+        }
+        return false;
+    }
+
     // Example actions
     public void hit() {
         System.out.println(name + " hits!");
