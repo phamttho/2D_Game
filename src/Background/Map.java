@@ -1,6 +1,8 @@
 package Background;
 
 import Personnage.Character;
+import Personnage.Enemy1;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.ImageObserver;
@@ -10,6 +12,7 @@ public class Map implements ImageObserver {
     private int height;
     private int tileSize;
     private Character mainCharacter;
+    private Enemy1 enemy1;
     private int[][] map; // 0: empty, 1: block, 2: door
 
 
@@ -35,6 +38,10 @@ public class Map implements ImageObserver {
         return tileSize;
     }
 
+    public int[][] getMap() {
+        return map;
+    }
+
     public Character getMainCharacter() {
         return mainCharacter;
     }
@@ -54,6 +61,7 @@ public class Map implements ImageObserver {
         return map[x][y] == 4;
     }
 
+
     public void draw(Graphics g) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -69,7 +77,7 @@ public class Map implements ImageObserver {
                     g.setColor(Color.RED);
                     g.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
                 }else if (map[i][j] == 0) {
-                        g.drawImage(BackgroundMap1, i* tileSize, j * tileSize, tileSize, tileSize, this);
+                    g.drawImage(BackgroundMap1, i* tileSize, j * tileSize, tileSize, tileSize, this);
                 }else {
                     g.setColor(Color.LIGHT_GRAY);
                     g.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
@@ -94,4 +102,9 @@ public class Map implements ImageObserver {
     public int getHeight() {
         return height;  // Return the height of the map
     }
+
+
+
+
+
 }

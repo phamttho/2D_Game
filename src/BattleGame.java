@@ -8,7 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
+import java.util.Random;
+
 
 public class BattleGame extends JFrame {
     private Character mainCharacter;
@@ -98,7 +99,59 @@ public class BattleGame extends JFrame {
             }
         });
         timer.start();
+        // Move enemies periodically
+        Timer enemyMoveTimer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                moveEnemies(gameMap);
+                gamePanel.repaint();
+            }
+        });
+        enemyMoveTimer.start();
     }
+
+    private void moveEnemies(Map map) {
+        Random random = new Random();
+        int[][] newMap = new int[map.getWidth()][map.getHeight()]; // Temporary map to track new positions of enemies
+
+        // Copy the current map state
+        for (int i = 0; i < map.getWidth(); i++) {
+            for (int j = 0; j < map.getHeight(); j++) {
+                newMap[i][j] = map.getMap()[i][j];
+            }
+        }
+
+        // Iterate through the map to move enemies
+        for (int i = 0; i < map.getWidth(); i++) {
+            for (int j = 0; j < map.getHeight(); j++) {
+                if (map.getMap()[i][j] == 3) {
+                    int direction = random.nextInt(4);
+                    int newX = i, newY = j;
+                    switch (direction) {
+                        case 0: newY--; break; // Move up
+                        case 1: newY++; break; // Move down
+                        case 2: newX--; break; // Move left
+                        case 3: newX++; break; // Move right
+                    }
+
+                    // Check if the new position is within bounds, walkable, and not occupied by another enemy
+                    if (newX >= 0 && newX < map.getWidth() && newY >= 0 && newY < map.getHeight() &&
+                            map.isWalkable(newX, newY) && newMap[newX][newY] != 3) {
+                        newMap[i][j] = 0; // Clear old position
+                        newMap[newX][newY] = 3; // Move enemy to new position
+                    }
+                }
+            }
+        }
+
+        // Update the game map with the new positions
+        for (int i = 0; i < map.getWidth(); i++) {
+            for (int j = 0; j < map.getHeight(); j++) {
+                map.getMap()[i][j] = newMap[i][j];
+            }
+        }
+    }
+
 
 
 
@@ -168,10 +221,60 @@ public class BattleGame extends JFrame {
             }
         });
         timer1.start();
+        Timer enemyMoveTimer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                moveEnemies2(map2);
+                gamePanel2.repaint();
+            }
+        });
+        enemyMoveTimer.start();
         gamePanel2.add(returnButton);
         setContentPane(gamePanel2);
         revalidate();
         repaint();
+    }
+
+    private void moveEnemies2(Map2 map) {
+        Random random = new Random();
+        int[][] newMap = new int[map.getWidth()][map.getHeight()]; // Temporary map to track new positions of enemies
+
+        // Copy the current map state
+        for (int i = 0; i < map.getWidth(); i++) {
+            for (int j = 0; j < map.getHeight(); j++) {
+                newMap[i][j] = map.getMap()[i][j];
+            }
+        }
+
+        // Iterate through the map to move enemies
+        for (int i = 0; i < map.getWidth(); i++) {
+            for (int j = 0; j < map.getHeight(); j++) {
+                if (map.getMap()[i][j] == 3) {
+                    int direction = random.nextInt(4);
+                    int newX = i, newY = j;
+                    switch (direction) {
+                        case 0: newY--; break; // Move up
+                        case 1: newY++; break; // Move down
+                        case 2: newX--; break; // Move left
+                        case 3: newX++; break; // Move right
+                    }
+
+                    // Check if the new position is within bounds, walkable, and not occupied by another enemy
+                    if (newX >= 0 && newX < map.getWidth() && newY >= 0 && newY < map.getHeight() &&
+                            map.isWalkable(newX, newY) && newMap[newX][newY] != 3) {
+                        newMap[i][j] = 0; // Clear old position
+                        newMap[newX][newY] = 3; // Move enemy to new position
+                    }
+                }
+            }
+        }
+
+        // Update the game map with the new positions
+        for (int i = 0; i < map.getWidth(); i++) {
+            for (int j = 0; j < map.getHeight(); j++) {
+                map.getMap()[i][j] = newMap[i][j];
+            }
+        }
     }
 
     public static void main(String[] args) {

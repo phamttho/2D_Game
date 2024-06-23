@@ -8,6 +8,7 @@ public class Character {
     private int power;
     private int x;
     private int y;
+    private int prevX, prevY;
     private int mapWidth;
     private int mapHeight;
     private Object map; // Use Object to accept any map type
@@ -18,10 +19,13 @@ public class Character {
         this.power = 10;   // Example power
         this.x = 1;        // Initial x position (inside the border)
         this.y = 1;        // Initial y position (inside the border)
+        this.prevX = 1;
+        this.prevY = 1;
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
         this.map = map;
     }
+
 
     public String getName() {
         return name;
@@ -110,16 +114,28 @@ public class Character {
         return false;
     }
 
+    public boolean isAtObject() {
+        if (map instanceof Map) {
+            return ((Map) map).isObject(x, y);
+        } else if (map instanceof Map2) {
+            return ((Map2) map).isObject(x, y);
+        }
+        return false;
+    }
     // Example actions
-    public void hit() {
-        System.out.println(name + " hits!");
+    public void hit(Character enemy) {
+        enemy.setHealth(enemy.getHealth() - this.power);
+        System.out.println(name + " hits " + enemy.getName() + "!");
     }
 
-    public void kick() {
-        System.out.println(name + " kicks!");
+    public void kick(Character enemy) {
+        enemy.setHealth(enemy.getHealth() - this.power * 2);
+        System.out.println(name + " kicks " + enemy.getName() + "!");
     }
 
-    public void specialPower() {
-        System.out.println(name + " uses special power!");
+    public void specialPower(Character enemy) {
+        enemy.setHealth(enemy.getHealth() - this.power * 3);
+        System.out.println(name + " uses special power on " + enemy.getName() + "!");
     }
+
 }

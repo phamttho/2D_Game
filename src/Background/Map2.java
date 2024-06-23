@@ -22,7 +22,7 @@ public class Map2 implements ImageObserver {
         this.tileSize = tileSize;
         this.map2 = predefinedMap;
         this.mainCharacter = mainCharacter;
-        this.ImgStrawbery = new ImageIcon("src/strawbery.png").getImage(); // Update the path to your image
+        this.ImgStrawbery = new ImageIcon("src/cucumber.png").getImage(); // Update the path to your image
         this.BackgroundMap1 = new ImageIcon("src/grass.png").getImage();
         this.Bricks = new ImageIcon("src/bricks.png").getImage();
 //        predefinedMap = new int[width][height];
@@ -30,7 +30,11 @@ public class Map2 implements ImageObserver {
 
     public int getTileSize() {
         return tileSize;
+
     }
+
+    public int[][] getMap() {
+        return map2;}
 
     public Character getMainCharacter() {
         return mainCharacter;

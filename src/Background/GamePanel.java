@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import Personnage.Character;
+import Personnage.Enemy1;
+
 public class GamePanel extends JPanel {
     private Map map;
     private Character character;
@@ -41,6 +43,8 @@ public class GamePanel extends JPanel {
         });
     }
 
+
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -51,4 +55,3 @@ public class GamePanel extends JPanel {
         g.drawImage(characterImage, character.getX() * tileSize, character.getY() * tileSize, tileSize, tileSize, this);
     }
 }
-
