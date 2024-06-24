@@ -76,6 +76,9 @@ public class GamePanel extends JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Wrong! You shall not pass.", "Enemy", JOptionPane.INFORMATION_MESSAGE);
             // Player stays at the same position
+            character.setX(1);
+            character.setY(1);
+
         }
 
         // Resume enemy movement timer
