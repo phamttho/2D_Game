@@ -12,15 +12,14 @@ public class GamePanel extends JPanel {
     private Map map;
     private final Character character;
     private final Image characterImage;
-    private Timer enemyMoveTime;
+    private Timer enemyMoveTimer;
 
 
 
-    public GamePanel(Map map, Character character,Timer enemyMoveTime) {
+    public GamePanel(Map map, Character character) {
         this.map = map;
         this.character = character;
-        this.characterImage = new ImageIcon("src/carrot.png").getImage(); // Update the path to your image
-        this.enemyMoveTime = enemyMoveTime;
+        this.characterImage = new ImageIcon("src/carrot.png").getImage(); // Update the path to your imag
         setFocusable(true);
 
         addKeyListener(new KeyAdapter() {
@@ -53,10 +52,12 @@ public class GamePanel extends JPanel {
             }
         });
     }
-
+    public void setTimer(Timer timer) {
+        this.enemyMoveTimer = timer;
+    }
     private void showEnemyQuestion() {
         // Stop enemy movement timer
-        enemyMoveTime.stop();
+        enemyMoveTimer.stop();
 
         // Show initial message
         JOptionPane.showMessageDialog(this, "Haha, let's see how good you are, answer my question if you want to pass.", "Enemy", JOptionPane.INFORMATION_MESSAGE);
@@ -78,7 +79,7 @@ public class GamePanel extends JPanel {
         }
 
         // Resume enemy movement timer
-        enemyMoveTime.start();
+        enemyMoveTimer.start();
     }
 
     @Override

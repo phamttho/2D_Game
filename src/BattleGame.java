@@ -68,7 +68,7 @@ public class BattleGame extends JFrame {
         gameMap = new Map(predefinedMap, mainCharacter, tileSize);
 
         // Create a main game panel
-        GamePanel gamePanel = new GamePanel(gameMap, mainCharacter,enemyMoveTime);
+        GamePanel gamePanel = new GamePanel(gameMap, mainCharacter);
         gamePanel.setLayout(null); // Use absolute positioning
 
         // Create return button
@@ -112,7 +112,7 @@ public class BattleGame extends JFrame {
             }
         });
         enemyMoveTimer.start();
-
+        gamePanel.setTimer(enemyMoveTimer);
     }
     private void moveEnemies(Map map) {
         Random random = new Random();
