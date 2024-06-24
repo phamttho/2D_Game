@@ -15,6 +15,7 @@ public class BattleGame extends JFrame {
     private Character mainCharacter;
     private Map gameMap;
     private Map2 map2;
+    private Timer enemyMoveTime;
 
     public BattleGame() {
         System.out.println("Battle Game");
@@ -56,6 +57,7 @@ public class BattleGame extends JFrame {
                 {1, 0, 1, 2, 1, 0, 1, 0, 0, 0, 0, 1, 2, 1, 0, 1, 0, 0, 1, 2, 1, 0, 1, 0, 0, 0, 0, 1, 2, 1, 0, 1},
                 {1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1},
                 {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
         };
 
@@ -66,7 +68,7 @@ public class BattleGame extends JFrame {
         gameMap = new Map(predefinedMap, mainCharacter, tileSize);
 
         // Create a main game panel
-        GamePanel gamePanel = new GamePanel(gameMap, mainCharacter);
+        GamePanel gamePanel = new GamePanel(gameMap, mainCharacter,enemyMoveTime);
         gamePanel.setLayout(null); // Use absolute positioning
 
         // Create return button
@@ -99,8 +101,10 @@ public class BattleGame extends JFrame {
             }
         });
         timer.start();
+
+
         // Move enemies periodically
-        Timer enemyMoveTimer = new Timer(1000, new ActionListener() {
+        Timer enemyMoveTimer = new Timer(500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 moveEnemies(gameMap);
@@ -108,8 +112,8 @@ public class BattleGame extends JFrame {
             }
         });
         enemyMoveTimer.start();
-    }
 
+    }
     private void moveEnemies(Map map) {
         Random random = new Random();
         int[][] newMap = new int[map.getWidth()][map.getHeight()]; // Temporary map to track new positions of enemies
@@ -186,6 +190,7 @@ public class BattleGame extends JFrame {
                 {1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1},
                 {1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1},
                 {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
         };
 
@@ -221,7 +226,7 @@ public class BattleGame extends JFrame {
             }
         });
         timer1.start();
-        Timer enemyMoveTimer = new Timer(1000, new ActionListener() {
+        Timer enemyMoveTimer = new Timer(500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 moveEnemies2(map2);

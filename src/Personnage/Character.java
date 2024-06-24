@@ -39,14 +39,6 @@ public class Character {
         this.health = health;
     }
 
-    public int getPower() {
-        return power;
-    }
-
-    public void setPower(int power) {
-        this.power = power;
-    }
-
     public int getX() {
         return x;
     }
@@ -114,28 +106,10 @@ public class Character {
         return false;
     }
 
-    public boolean isAtObject() {
-        if (map instanceof Map) {
-            return ((Map) map).isObject(x, y);
-        } else if (map instanceof Map2) {
-            return ((Map2) map).isObject(x, y);
+    public boolean checkCollision(Map map) {
+        return map.getMap()[x][y] == 3;
         }
-        return false;
-    }
-    // Example actions
-    public void hit(Character enemy) {
-        enemy.setHealth(enemy.getHealth() - this.power);
-        System.out.println(name + " hits " + enemy.getName() + "!");
-    }
 
-    public void kick(Character enemy) {
-        enemy.setHealth(enemy.getHealth() - this.power * 2);
-        System.out.println(name + " kicks " + enemy.getName() + "!");
-    }
 
-    public void specialPower(Character enemy) {
-        enemy.setHealth(enemy.getHealth() - this.power * 3);
-        System.out.println(name + " uses special power on " + enemy.getName() + "!");
-    }
 
 }

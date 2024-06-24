@@ -62,6 +62,7 @@ public class Map implements ImageObserver {
     }
 
 
+
     public void draw(Graphics g) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
