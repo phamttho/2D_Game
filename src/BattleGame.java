@@ -15,7 +15,6 @@ public class BattleGame extends JFrame {
     private Character mainCharacter;
     private Map gameMap;
     private Map2 map2;
-    private Timer enemyMoveTime;
 
     public BattleGame() {
         System.out.println("Battle Game");
@@ -25,8 +24,6 @@ public class BattleGame extends JFrame {
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int tileSize = 50; // Example tile size
-        int mapWidth = screenSize.width / tileSize;
-        int mapHeight = screenSize.height / tileSize;
 
         int[][] predefinedMap = {
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
