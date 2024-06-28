@@ -35,7 +35,7 @@ Assurez-vous que les fichiers d'image (par exemple, carrot_soldier.png) sont pla
 Lancer le Jeu
 Compilez les fichiers Java.
 
-Exécutez la classe BattleGame pour démarrer le jeu.
+Exécutez la classe GameMenu pour démarrer le jeu.
 
 Comment Jouer
 
