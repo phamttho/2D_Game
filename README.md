@@ -21,9 +21,13 @@ Installation
 Clonez le dépôt ou téléchargez le code source.
 
 bash
+
 Copy code
+
 git clone https://github.com/phamttho/2D-Game.git
+
 cd 2D-Game
+
 Ouvrez le projet dans votre IDE préféré.
 
 Assurez-vous que les fichiers d'image (par exemple, carrot_soldier.png) sont placés dans le répertoire correct tel que référencé dans le code.
