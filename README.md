@@ -53,5 +53,4 @@ Les contributions sont les bienvenues ! Veuillez forker le dépôt et soumettre 
 Licence
 
 
-Contact
-Pour toute question ou demande, veuillez contacter [votre-email@example.com].
+
