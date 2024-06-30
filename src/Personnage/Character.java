@@ -54,13 +54,11 @@ public class Character {
             y--;
         }
     }
-
     public void moveDown() {
         if (y < mapHeight - 1 && isWalkable(x, y + 1)) {
             y++;
         }
     }
-
     public void moveLeft() {
         if (x > 0 && isWalkable(x - 1, y)) {
             x--;
@@ -72,6 +70,30 @@ public class Character {
             x++;
         }
     }
+
+
+    public void moveUpAfterQuestion() {
+        if (y > 0 && isWalkable(x, y - 2)) {
+            y--;
+        }
+    }
+    public void moveDownAfterQuestion() {
+        if (y < mapHeight - 1 && isWalkable(x, y + 2)) {
+            y++;
+        }
+    }
+    public void moveLeftAfterQuestion() {
+        if (x > 0 && isWalkable(x - 2, y)) {
+            x--;
+        }
+    }
+
+    public void moveRightAfterQuestion() {
+        if (x < mapWidth - 1 && isWalkable(x + 2, y)) {
+            x++;
+        }
+    }
+
 
     private boolean isWalkable(int x, int y) {
         if (map instanceof Map) {

@@ -42,10 +42,6 @@ public class Map implements ImageObserver {
         return map;
     }
 
-    public Character getMainCharacter() {
-        return mainCharacter;
-    }
-
     public boolean isWalkable(int x, int y) {
         return map[x][y] != 1;
     }
@@ -54,8 +50,6 @@ public class Map implements ImageObserver {
         return map[x][y] == 2;
     }
 
-    public boolean isObject(int x, int y) {
-        return map[x][y] != 3;}
 
     public boolean isWinner(int x, int y) {
         return map[x][y] == 4;

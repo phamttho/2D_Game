@@ -14,6 +14,14 @@ public class GamePanel extends JPanel {
     private final Character character;
     private final Image characterImage;
     private Timer enemyMoveTimer;
+    private boolean lastAnswerCorrect = true; // Flag to track if the last answer was correct
+    private int lastDirection = -1; // Variable to store the last movement direction
+
+    // Directions constants
+    private static final int UP = 0;
+    private static final int DOWN = 1;
+    private static final int LEFT = 2;
+    private static final int RIGHT = 3;
 
     // Class to hold questions and answers
     private static class Question {
@@ -44,20 +52,46 @@ public class GamePanel extends JPanel {
                 int oldX = character.getX();
                 int oldY = character.getY();
 
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_UP:
-                        character.moveUp();
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        character.moveDown();
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        character.moveLeft();
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        character.moveRight();
-                        break;
+                if (lastAnswerCorrect) {
+                    switch (e.getKeyCode()) {
+                        case KeyEvent.VK_UP:
+                            character.moveUp();
+                            lastDirection = UP;
+                            break;
+                        case KeyEvent.VK_DOWN:
+                            character.moveDown();
+                            lastDirection = DOWN;
+                            break;
+                        case KeyEvent.VK_LEFT:
+                            character.moveLeft();
+                            lastDirection = LEFT;
+                            break;
+                        case KeyEvent.VK_RIGHT:
+                            character.moveRight();
+                            lastDirection = RIGHT;
+                            break;
+                    }
+                } else {
+                    switch (e.getKeyCode()) {
+                        case KeyEvent.VK_UP:
+                            character.moveUpAfterQuestion();
+                            lastDirection = UP;
+                            break;
+                        case KeyEvent.VK_DOWN:
+                            character.moveDownAfterQuestion();
+                            lastDirection = DOWN;
+                            break;
+                        case KeyEvent.VK_LEFT:
+                            character.moveLeftAfterQuestion();
+                            lastDirection = LEFT;
+                            break;
+                        case KeyEvent.VK_RIGHT:
+                            character.moveRightAfterQuestion();
+                            lastDirection = RIGHT;
+                            break;
+                    }
                 }
+
                 if (character.checkCollision(map)) {
                     character.setX(oldX);
                     character.setY(oldY);
@@ -89,16 +123,41 @@ public class GamePanel extends JPanel {
 
         if (response == selectedQuestion.correctAnswer) {
             JOptionPane.showMessageDialog(this, "Correct! You may pass.", "Enemy", JOptionPane.INFORMATION_MESSAGE);
-            // Enemy lets the player pass, resume enemy movement
+            lastAnswerCorrect = true; // Set the flag to true if the answer is correct
+            moveCharacterTwoStepsForward();
         } else {
             JOptionPane.showMessageDialog(this, "Wrong! You shall not pass.", "Enemy", JOptionPane.INFORMATION_MESSAGE);
-            // Player stays at the same position
+            lastAnswerCorrect = false; // Set the flag to false if the answer is incorrect
             character.setX(1);
             character.setY(1);
         }
 
         // Resume enemy movement timer
         enemyMoveTimer.start();
+    }
+
+    private void moveCharacterTwoStepsForward() {
+        switch (lastDirection) {
+            case UP:
+                character.setY(character.getY() - 2);
+                break;
+            case DOWN:
+                character.setY(character.getY() + 2);
+                break;
+            case LEFT:
+                character.setX(character.getX() - 2);
+                break;
+            case RIGHT:
+                character.setX(character.getX() + 2);
+                break;
+        }
+
+        // Ensure the character doesn't move out of bounds or into an unwalkable area
+        if (character.getX() < 0 || character.getX() >= map.getWidth() || character.getY() < 0 || character.getY() >= map.getHeight() || !map.isWalkable(character.getX(), character.getY())) {
+            // Revert to previous position if out of bounds or unwalkable
+            character.setX(character.getX() + (lastDirection == LEFT ? 2 : lastDirection == RIGHT ? -2 : 0));
+            character.setY(character.getY() + (lastDirection == UP ? 2 : lastDirection == DOWN ? -2 : 0));
+        }
     }
 
     // Load questions into the list
