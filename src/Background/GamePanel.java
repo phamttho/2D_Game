@@ -52,44 +52,23 @@ public class GamePanel extends JPanel {
                 int oldX = character.getX();
                 int oldY = character.getY();
 
-                if (lastAnswerCorrect) {
-                    switch (e.getKeyCode()) {
-                        case KeyEvent.VK_UP:
-                            character.moveUp();
-                            lastDirection = UP;
-                            break;
-                        case KeyEvent.VK_DOWN:
-                            character.moveDown();
-                            lastDirection = DOWN;
-                            break;
-                        case KeyEvent.VK_LEFT:
-                            character.moveLeft();
-                            lastDirection = LEFT;
-                            break;
-                        case KeyEvent.VK_RIGHT:
-                            character.moveRight();
-                            lastDirection = RIGHT;
-                            break;
-                    }
-                } else {
-                    switch (e.getKeyCode()) {
-                        case KeyEvent.VK_UP:
-                            character.moveUpAfterQuestion();
-                            lastDirection = UP;
-                            break;
-                        case KeyEvent.VK_DOWN:
-                            character.moveDownAfterQuestion();
-                            lastDirection = DOWN;
-                            break;
-                        case KeyEvent.VK_LEFT:
-                            character.moveLeftAfterQuestion();
-                            lastDirection = LEFT;
-                            break;
-                        case KeyEvent.VK_RIGHT:
-                            character.moveRightAfterQuestion();
-                            lastDirection = RIGHT;
-                            break;
-                    }
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                        character.moveUp();
+                        lastDirection = UP;
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        character.moveDown();
+                        lastDirection = DOWN;
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        character.moveLeft();
+                        lastDirection = LEFT;
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        character.moveRight();
+                        lastDirection = RIGHT;
+                        break;
                 }
 
                 if (character.checkCollision(map)) {

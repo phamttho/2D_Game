@@ -45,6 +45,9 @@ public class Map implements ImageObserver {
     public boolean isWalkable(int x, int y) {
         return map[x][y] != 1;
     }
+    public boolean isWalkableEnemy(int x, int y) {
+        return map[x][y] != 1 && map[x][y] != 2&& map[x][y] != 3 ;
+    }
 
     public boolean isDoor(int x, int y) {
         return map[x][y] == 2;

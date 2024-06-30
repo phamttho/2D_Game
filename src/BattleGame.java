@@ -137,7 +137,7 @@ public class BattleGame extends JFrame {
 
                     // Check if the new position is within bounds, walkable, and not occupied by another enemy
                     if (newX >= 0 && newX < map.getWidth() && newY >= 0 && newY < map.getHeight() &&
-                            map.isWalkable(newX, newY) && newMap[newX][newY] != 3) {
+                            map.isWalkableEnemy(newX, newY) && newMap[newX][newY] != 3) {
                         newMap[i][j] = 0; // Clear old position
                         newMap[newX][newY] = 3; // Move enemy to new position
                     }
