@@ -21,7 +21,7 @@ public class GamePanel2 extends JPanel {
     private Timer enemyMoveTimer;
     private boolean lastAnswerCorrect = true; // Flag to track if the last answer was correct
     private int lastDirection = -1; // Variable to store the last movement direction
-    private int remainingHearts = 5;
+    private int remainingHearts = 3;
 
     // Directions constants
     private static final int UP = 0;
