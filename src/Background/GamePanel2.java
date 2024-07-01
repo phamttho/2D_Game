@@ -43,10 +43,10 @@ public class GamePanel2 extends JPanel {
     }
     private final java.util.List<Question> questions;
 
-    public GamePanel2(Map2 map, Character character) {
+    public GamePanel2(Map2 map, Character character, String characterName) {
         this.map = map;
         this.character = character;
-        this.characterImage = new ImageIcon("src/carrot.png").getImage(); // Update the path to your image
+        this.characterImage = new ImageIcon(String.format("src/%s.png",characterName)).getImage(); // Update the path to your image
         this.gameMenu = new GameMenu("src/vetgetwar.PNG");
         this.heartImage = new ImageIcon("src/heart.png").getImage(); // Load the heart image
         this.questions = loadQuestions();

@@ -13,9 +13,11 @@ public class BattleGame extends JFrame {
     private Character mainCharacter;
     private Map gameMap;
     private Map2 map2;
+    private String characterName;
 
-    public BattleGame() {
+    public BattleGame(String characterName) {
         System.out.println("Battle Game");
+        this.characterName = characterName;
         setTitle("Battle Game");
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +68,7 @@ public class BattleGame extends JFrame {
 
 
         // Create a main game panel
-        GamePanel gamePanel = new GamePanel(gameMap, mainCharacter);
+        GamePanel gamePanel = new GamePanel(gameMap, mainCharacter, characterName);
         gamePanel.setLayout(null); // Use absolute positioning
 
         // Create return button
@@ -198,7 +200,8 @@ public class BattleGame extends JFrame {
         map2 = new Map2(predefinedMap2, mainCharacter, gameMap.getTileSize());
 
 
-        GamePanel2 gamePanel2 = new GamePanel2(map2, mainCharacter);
+
+        GamePanel2 gamePanel2 = new GamePanel2(map2, mainCharacter, this.characterName);
         gamePanel2.setLayout(null);
 
         JButton returnButton = new JButton("Return");
@@ -287,7 +290,7 @@ public class BattleGame extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new BattleGame().setVisible(true);
+                new BattleGame("Carrot").setVisible(true);
             }
         });
     }

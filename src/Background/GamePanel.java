@@ -21,7 +21,7 @@ public class GamePanel extends JPanel {
     private Timer enemyMoveTimer;
     private boolean lastAnswerCorrect = true; // Flag to track if the last answer was correct
     private int lastDirection = -1; // Variable to store the last movement direction
-    private int remainingHearts = 5;
+    private int remainingHearts = 3;
 
     // Directions constants
     private static final int UP = 0;
@@ -45,10 +45,11 @@ public class GamePanel extends JPanel {
     // List to hold all questions
     private final List<Question> questions;
 
-    public GamePanel(Map map, Character character) {
+    public GamePanel(Map map, Character character, String characterName) {
         this.map = map;
         this.character = character;
-        this.characterImage = new ImageIcon("src/carrot.png").getImage(); // Update the path to your image
+
+        this.characterImage = new ImageIcon(String.format("src/%s.png",characterName)).getImage(); // Update the path to your image
         this.heartImage = new ImageIcon("src/heart.png").getImage(); // Load the heart image
         this.gameMenu = new GameMenu("src/vetgetwar.PNG");
         this.questions = loadQuestions();

@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 public class GameMenu extends JFrame {
     private final Image backgroundImage;
 
+    private String currentCharacter = "carrot";
+
     public GameMenu(String imagePath) {
         // Load background image
         backgroundImage = new ImageIcon(imagePath).getImage();
@@ -31,10 +33,11 @@ public class GameMenu extends JFrame {
         backgroundPanel.setLayout(null); // Use absolute positioning
 
         // Create buttons
-        JButton introductionButton = new JButton("Introduction");
-        JButton howToPlayButton = new JButton("How to Play");
+
         JButton startButton = new JButton("Start");
-        JButton settingsButton = new JButton("Settings");
+        JButton playAsCucumber = new JButton("Play as cucumber");
+        JButton playAsEggplant = new JButton("Play as eggplant");
+        JButton playAsRaspberry = new JButton("Play as Raspberry ");
 
         // Set button bounds (x, y, width, height)
         int buttonWidth = 200;
@@ -42,28 +45,41 @@ public class GameMenu extends JFrame {
         int centerX = (Toolkit.getDefaultToolkit().getScreenSize().width - buttonWidth) / 2;
         int centerY = (Toolkit.getDefaultToolkit().getScreenSize().height) / 2;
 
-        introductionButton.setBounds(centerX, centerY - 100, buttonWidth, buttonHeight);
-        howToPlayButton.setBounds(centerX, centerY - 40, buttonWidth, buttonHeight);
-        startButton.setBounds(centerX, centerY + 20, buttonWidth, buttonHeight);
-        settingsButton.setBounds(centerX, centerY + 80, buttonWidth, buttonHeight);
+        startButton.setBounds(centerX, centerY - 100, buttonWidth, buttonHeight);
+        playAsCucumber.setBounds(centerX, centerY - 40, buttonWidth, buttonHeight);
+        playAsRaspberry.setBounds(centerX, centerY + 20, buttonWidth, buttonHeight);
+        playAsEggplant.setBounds(centerX, centerY + 80, buttonWidth, buttonHeight);
 
         // Add buttons to the panel
-        backgroundPanel.add(introductionButton);
-        backgroundPanel.add(howToPlayButton);
         backgroundPanel.add(startButton);
-        backgroundPanel.add(settingsButton);
+        backgroundPanel.add(playAsCucumber);
+        backgroundPanel.add(playAsRaspberry);
+        backgroundPanel.add(playAsEggplant);
 
         // Set up button actions (you can customize these as needed)
-        introductionButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Introduction Page"));
-
-        howToPlayButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "How to Play Page"));
 
         startButton.addActionListener(this::actionPerformed);
 
-        settingsButton.addActionListener(new ActionListener() {
+        playAsCucumber.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Settings Page");
+                    currentCharacter = "cucumber";
+                JOptionPane.showMessageDialog(null, "Character changed to: " + currentCharacter);
+            }
+        });
+
+        playAsRaspberry.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentCharacter = "raspberry";
+                JOptionPane.showMessageDialog(null, "Character changed to: " + currentCharacter);
+            }
+        });
+        playAsEggplant.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentCharacter = "eggplant";
+                JOptionPane.showMessageDialog(null, "Character changed to: " + currentCharacter);
             }
         });
 
@@ -89,7 +105,7 @@ public class GameMenu extends JFrame {
 
     private void actionPerformed(ActionEvent e) {
         // Start the battle game
-        new BattleGame().setVisible(true);
+        new BattleGame(currentCharacter).setVisible(true);
         dispose(); // Close the menu window
     }
 }
