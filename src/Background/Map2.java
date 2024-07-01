@@ -36,20 +36,18 @@ public class Map2 implements ImageObserver {
     public int[][] getMap() {
         return map2;}
 
-    public Character getMainCharacter() {
-        return mainCharacter;
-    }
 
     public boolean isWalkable(int x, int y) {
-        return map2[x][y] != 1;
+        return map2[x][y] != 1 && map2[x][y] != 2 ;
+    }
+    public boolean isWalkableEnemy(int x, int y) {
+        return map2[x][y] != 1 && map2[x][y] != 2 && map2[x][y] != 3 ;
     }
 
     public boolean isDoor(int x, int y) {
         return map2[x][y] == 2;
     }
 
-    public boolean isObject(int x, int y) {
-        return map2[x][y] != 3;}
     public boolean isWinner(int x, int y) {
         return map2[x][y] == 4;
     }

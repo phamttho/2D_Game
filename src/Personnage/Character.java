@@ -72,28 +72,6 @@ public class Character {
     }
 
 
-    public void moveUpAfterQuestion() {
-        if (y > 0 && isWalkable(x, y - 2)) {
-            y--;
-        }
-    }
-    public void moveDownAfterQuestion() {
-        if (y < mapHeight - 1 && isWalkable(x, y + 2)) {
-            y++;
-        }
-    }
-    public void moveLeftAfterQuestion() {
-        if (x > 0 && isWalkable(x - 2, y)) {
-            x--;
-        }
-    }
-
-    public void moveRightAfterQuestion() {
-        if (x < mapWidth - 1 && isWalkable(x + 2, y)) {
-            x++;
-        }
-    }
-
 
     private boolean isWalkable(int x, int y) {
         if (map instanceof Map) {
@@ -125,6 +103,9 @@ public class Character {
     public boolean checkCollision(Map map) {
         return map.getMap()[x][y] == 3;
         }
+    public boolean checkCollision2(Map2 map) {
+        return map.getMap()[x][y] == 3;
+    }
 
 
 

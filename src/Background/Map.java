@@ -1,7 +1,6 @@
 package Background;
 
 import Personnage.Character;
-import Personnage.Enemy1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,6 @@ public class Map implements ImageObserver {
     private int height;
     private int tileSize;
     private Character mainCharacter;
-    private Enemy1 enemy1;
     private int[][] map; // 0: empty, 1: block, 2: door
 
 
@@ -46,7 +44,7 @@ public class Map implements ImageObserver {
         return map[x][y] != 1;
     }
     public boolean isWalkableEnemy(int x, int y) {
-        return map[x][y] != 1 && map[x][y] != 2&& map[x][y] != 3 ;
+        return map[x][y] != 1 && map[x][y] != 2 && map[x][y] != 3 ;
     }
 
     public boolean isDoor(int x, int y) {
