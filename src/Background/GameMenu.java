@@ -1,3 +1,5 @@
+package Background;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -78,6 +80,11 @@ public class GameMenu extends JFrame {
                 new GameMenu(imagePath).setVisible(true);
             }
         });
+    }
+
+    public void showMenu() {
+        // Show the game menu
+        setVisible(true);
     }
 
     private void actionPerformed(ActionEvent e) {

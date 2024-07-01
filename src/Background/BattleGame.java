@@ -1,7 +1,4 @@
-import Background.GamePanel;
-import Background.GamePanel2;
-import Background.Map;
-import Background.Map2;
+package Background;
 import Personnage.Character;
 
 
@@ -64,6 +61,9 @@ public class BattleGame extends JFrame {
 
         mainCharacter = new Character("Player", predefinedMap.length, predefinedMap[0].length, gameMap);
         gameMap = new Map(predefinedMap, mainCharacter, tileSize);
+
+
+
 
         // Create a main game panel
         GamePanel gamePanel = new GamePanel(gameMap, mainCharacter);

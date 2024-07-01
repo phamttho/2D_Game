@@ -14,11 +14,14 @@ import Personnage.Character;
 
 public class GamePanel extends JPanel {
     private final Map map;
+    private final GameMenu gameMenu;
     private final Character character;
     private final Image characterImage;
+    private final Image heartImage;
     private Timer enemyMoveTimer;
     private boolean lastAnswerCorrect = true; // Flag to track if the last answer was correct
     private int lastDirection = -1; // Variable to store the last movement direction
+    private int remainingHearts = 5;
 
     // Directions constants
     private static final int UP = 0;
@@ -46,6 +49,8 @@ public class GamePanel extends JPanel {
         this.map = map;
         this.character = character;
         this.characterImage = new ImageIcon("src/carrot.png").getImage(); // Update the path to your image
+        this.heartImage = new ImageIcon("src/heart.png").getImage(); // Load the heart image
+        this.gameMenu = new GameMenu("src/vetgetwar.PNG");
         this.questions = loadQuestions();
         setFocusable(true);
 
@@ -86,6 +91,7 @@ public class GamePanel extends JPanel {
                 repaint();
             }
         });
+
     }
 
     public void setTimer(Timer timer) {
@@ -118,10 +124,19 @@ public class GamePanel extends JPanel {
             playSound("src/Sound/wrong-buzzer-6268.wav");
             character.setX(1);
             character.setY(1);
+            remainingHearts--; // Decrease the number of remaining hearts
+            if (remainingHearts <= 0) {
+                // Game over logic here (e.g., reset the game or end it)
+                gameMenu.showMenu();
+                JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(GamePanel.this);
+                topFrame.dispose();
+            }
         }
+
 
         // Resume enemy movement timer
         enemyMoveTimer.start();
+
     }
 
     private void moveCharacterTwoStepsForward() {
@@ -222,5 +237,10 @@ public class GamePanel extends JPanel {
         // Draw the main character image
         int tileSize = map.getTileSize();
         g.drawImage(characterImage, character.getX() * tileSize, character.getY() * tileSize, tileSize, tileSize, this);
+
+        // Draw the hearts
+        for (int i = 0; i < remainingHearts; i++) {
+            g.drawImage(heartImage, i * 20, 0, 20, 20, this); // Draw hearts with a small gap between them
+        }
     }
 }

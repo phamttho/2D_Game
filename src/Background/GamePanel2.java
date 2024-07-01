@@ -14,11 +14,14 @@ import java.util.Random;
 
 public class GamePanel2 extends JPanel {
     private final Map2 map;
+    private final GameMenu gameMenu;
     private final Character character;
     private final Image characterImage;
+    private final Image heartImage;
     private Timer enemyMoveTimer;
     private boolean lastAnswerCorrect = true; // Flag to track if the last answer was correct
     private int lastDirection = -1; // Variable to store the last movement direction
+    private int remainingHearts = 5;
 
     // Directions constants
     private static final int UP = 0;
@@ -38,12 +41,14 @@ public class GamePanel2 extends JPanel {
             this.correctAnswer = correctAnswer;
         }
     }
-    private final java.util.List<GamePanel2.Question> questions;
+    private final java.util.List<Question> questions;
 
     public GamePanel2(Map2 map, Character character) {
         this.map = map;
         this.character = character;
         this.characterImage = new ImageIcon("src/carrot.png").getImage(); // Update the path to your image
+        this.gameMenu = new GameMenu("src/vetgetwar.PNG");
+        this.heartImage = new ImageIcon("src/heart.png").getImage(); // Load the heart image
         this.questions = loadQuestions();
         setFocusable(true);
 
@@ -99,7 +104,7 @@ public class GamePanel2 extends JPanel {
 
         // Randomly select a question
         Random random = new Random();
-        GamePanel2.Question selectedQuestion = questions.get(random.nextInt(questions.size()));
+        Question selectedQuestion = questions.get(random.nextInt(questions.size()));
 
         // Show the question
         int response = JOptionPane.showOptionDialog(this, selectedQuestion.question, "Enemy Question",
@@ -116,6 +121,13 @@ public class GamePanel2 extends JPanel {
             playSound("src/Sound/wrong-buzzer-6268.wav");
             character.setX(1);
             character.setY(1);
+            remainingHearts--; // Decrease the number of remaining hearts
+            if (remainingHearts <= 0) {
+                // Game over logic here (e.g., reset the game or end it)
+                gameMenu.showMenu();
+                JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(GamePanel2.this);
+                topFrame.dispose();
+            }
         }
 
         // Resume enemy movement timer
@@ -158,15 +170,15 @@ public class GamePanel2 extends JPanel {
         }
     }
     // Load questions into the list
-    private java.util.List<GamePanel2.Question> loadQuestions() {
-        java.util.List<GamePanel2.Question> questions = new ArrayList<>();
-        questions.add(new GamePanel2.Question("Who developed the theory of general relativity?", new String[]{"A. Isaac Newton", "B. Albert Einstein", "C. Niels Bohr", "D. Galileo Galilei"}, 1));
-        questions.add(new GamePanel2.Question("What is the most abundant gas in the Earth's atmosphere?", new String[]{"A. Oxygen", "B. Nitrogen", "C. Carbon Dioxide", "D. Hydrogen"}, 1));
-        questions.add(new GamePanel2.Question("What is the primary component of the sun?", new String[]{"A. Oxygen", "B. Nitrogen", "C. Helium", "D. Hydrogen"}, 3));
-        questions.add(new GamePanel2.Question("What is the study of the interactions between organisms and their environment called?", new String[]{"A. Biology", "B. Ecology", "C. Geology", "D. Chemistry"}, 1));
-        questions.add(new GamePanel2.Question("Who is known as the father of genetics?", new String[]{"A. Charles Darwin", "B. Gregor Mendel", "C. James Watson", "D. Francis Crick"}, 1));
-        questions.add(new GamePanel2.Question("What is the closest star to Earth?", new String[]{"A. Alpha Centauri", "B. Proxima Centauri", "C. Betelgeuse", "D. The Sun"}, 3));
-        questions.add(new GamePanel2.Question("What is the chemical symbol for mercury?", new String[]{"A. Me", "B. Mg", "C. Hg", "D. Mr"}, 2));
+    private java.util.List<Question> loadQuestions() {
+        java.util.List<Question> questions = new ArrayList<>();
+        questions.add(new Question("Who developed the theory of general relativity?", new String[]{"A. Isaac Newton", "B. Albert Einstein", "C. Niels Bohr", "D. Galileo Galilei"}, 1));
+        questions.add(new Question("What is the most abundant gas in the Earth's atmosphere?", new String[]{"A. Oxygen", "B. Nitrogen", "C. Carbon Dioxide", "D. Hydrogen"}, 1));
+        questions.add(new Question("What is the primary component of the sun?", new String[]{"A. Oxygen", "B. Nitrogen", "C. Helium", "D. Hydrogen"}, 3));
+        questions.add(new Question("What is the study of the interactions between organisms and their environment called?", new String[]{"A. Biology", "B. Ecology", "C. Geology", "D. Chemistry"}, 1));
+        questions.add(new Question("Who is known as the father of genetics?", new String[]{"A. Charles Darwin", "B. Gregor Mendel", "C. James Watson", "D. Francis Crick"}, 1));
+        questions.add(new Question("What is the closest star to Earth?", new String[]{"A. Alpha Centauri", "B. Proxima Centauri", "C. Betelgeuse", "D. The Sun"}, 3));
+        questions.add(new Question("What is the chemical symbol for mercury?", new String[]{"A. Me", "B. Mg", "C. Hg", "D. Mr"}, 2));
 
         return questions;
     }
@@ -179,5 +191,10 @@ public class GamePanel2 extends JPanel {
         // Draw the main character image
         int tileSize = map.getTileSize();
         g.drawImage(characterImage, character.getX() * tileSize, character.getY() * tileSize, tileSize, tileSize, this);
+
+        // Draw the hearts
+        for (int i = 0; i < remainingHearts; i++) {
+            g.drawImage(heartImage, i * 20, 0, 20, 20, this); // Draw hearts with a small gap between them
+        }
     }
 }
