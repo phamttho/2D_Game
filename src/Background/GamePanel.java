@@ -1,9 +1,12 @@
 package Background;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -56,18 +59,22 @@ public class GamePanel extends JPanel {
                     case KeyEvent.VK_UP:
                         character.moveUp();
                         lastDirection = UP;
+                        playSound("src/sound_1.wav");
                         break;
                     case KeyEvent.VK_DOWN:
                         character.moveDown();
                         lastDirection = DOWN;
+                        playSound("src/sound_1.wav");
                         break;
                     case KeyEvent.VK_LEFT:
                         character.moveLeft();
                         lastDirection = LEFT;
+                        playSound("src/sound_1.wav");
                         break;
                     case KeyEvent.VK_RIGHT:
                         character.moveRight();
                         lastDirection = RIGHT;
+                        playSound("src/sound_1.wav");
                         break;
                 }
 
@@ -139,6 +146,18 @@ public class GamePanel extends JPanel {
         }
     }
 
+    // Method to play sound effects
+    private void playSound(String soundFile) {
+        try {
+            File file = new File(soundFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
     // Load questions into the list
     private List<Question> loadQuestions() {
         List<Question> questions = new ArrayList<>();
