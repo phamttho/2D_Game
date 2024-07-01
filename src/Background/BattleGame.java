@@ -79,7 +79,7 @@ public class BattleGame extends JFrame {
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GameMenu("src/vetgetwar.PNG").setVisible(true); // Replace with your image path
+                new GameMenu().setVisible(true); // Replace with your image path
                 dispose(); // Close the game window
             }
         });
@@ -211,7 +211,7 @@ public class BattleGame extends JFrame {
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GameMenu("src/vetgetwar.PNG").setVisible(true); // Replace with your image path
+                new GameMenu().setVisible(true); // Replace with your image path
                 dispose(); // Close the game window
             }
         });
@@ -222,7 +222,7 @@ public class BattleGame extends JFrame {
                 if (mainCharacter.isTheWinner()) {
                     JOptionPane.showMessageDialog(null, "Congratulation, you won the game!!!");
                     ((Timer) e.getSource()).stop();
-                    new GameMenu("src/vetgetwar.PNG").setVisible(true); // Replace with your image path
+                    new GameMenu().setVisible(true); // Replace with your image path
                     dispose(); // Close the game window
                 }
                 gamePanel2.repaint();

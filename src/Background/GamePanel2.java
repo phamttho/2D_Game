@@ -47,7 +47,7 @@ public class GamePanel2 extends JPanel {
         this.map = map;
         this.character = character;
         this.characterImage = new ImageIcon(String.format("src/%s.png",characterName)).getImage(); // Update the path to your image
-        this.gameMenu = new GameMenu("src/vetgetwar.PNG");
+        this.gameMenu = new GameMenu();
         this.heartImage = new ImageIcon("src/heart.png").getImage(); // Load the heart image
         this.questions = loadQuestions();
         setFocusable(true);

@@ -10,9 +10,9 @@ public class GameMenu extends JFrame {
 
     private String currentCharacter = "carrot";
 
-    public GameMenu(String imagePath) {
+    public GameMenu() {
         // Load background image
-        backgroundImage = new ImageIcon(imagePath).getImage();
+        this.backgroundImage = new ImageIcon("src/vetgetwar.PNG").getImage();
 
         // Set up the frame
         setTitle("2DGame");
@@ -35,7 +35,7 @@ public class GameMenu extends JFrame {
         // Create buttons
 
         JButton startButton = new JButton("Start");
-        JButton playAsCucumber = new JButton("Play as cucumber");
+        JButton playAsBanana = new JButton("Play as banana");
         JButton playAsEggplant = new JButton("Play as eggplant");
         JButton playAsRaspberry = new JButton("Play as Raspberry ");
 
@@ -46,13 +46,13 @@ public class GameMenu extends JFrame {
         int centerY = (Toolkit.getDefaultToolkit().getScreenSize().height) / 2;
 
         startButton.setBounds(centerX, centerY - 100, buttonWidth, buttonHeight);
-        playAsCucumber.setBounds(centerX, centerY - 40, buttonWidth, buttonHeight);
+        playAsBanana.setBounds(centerX, centerY - 40, buttonWidth, buttonHeight);
         playAsRaspberry.setBounds(centerX, centerY + 20, buttonWidth, buttonHeight);
         playAsEggplant.setBounds(centerX, centerY + 80, buttonWidth, buttonHeight);
 
         // Add buttons to the panel
         backgroundPanel.add(startButton);
-        backgroundPanel.add(playAsCucumber);
+        backgroundPanel.add(playAsBanana);
         backgroundPanel.add(playAsRaspberry);
         backgroundPanel.add(playAsEggplant);
 
@@ -60,10 +60,10 @@ public class GameMenu extends JFrame {
 
         startButton.addActionListener(this::actionPerformed);
 
-        playAsCucumber.addActionListener(new ActionListener() {
+        playAsBanana.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    currentCharacter = "cucumber";
+                    currentCharacter = "banana";
                 JOptionPane.showMessageDialog(null, "Character changed to: " + currentCharacter);
             }
         });
@@ -93,7 +93,7 @@ public class GameMenu extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new GameMenu(imagePath).setVisible(true);
+                new GameMenu().setVisible(true);
             }
         });
     }
