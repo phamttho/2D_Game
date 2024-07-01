@@ -1,13 +1,16 @@
 package Background;
 
 import Personnage.Character;
-
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
 
 public class GamePanel2 extends JPanel {
     private final Map2 map;
@@ -54,18 +57,22 @@ public class GamePanel2 extends JPanel {
                     case KeyEvent.VK_UP:
                         character.moveUp();
                         lastDirection = UP;
+                        playSound("src/Sound/sound_1.wav");
                         break;
                     case KeyEvent.VK_DOWN:
                         character.moveDown();
                         lastDirection = DOWN;
+                        playSound("src/Sound/sound_1.wav");
                         break;
                     case KeyEvent.VK_LEFT:
                         character.moveLeft();
                         lastDirection = LEFT;
+                        playSound("src/Sound/sound_1.wav");
                         break;
                     case KeyEvent.VK_RIGHT:
                         character.moveRight();
                         lastDirection = RIGHT;
+                        playSound("src/Sound/sound_1.wav");
                         break;
                 }
 
@@ -101,10 +108,12 @@ public class GamePanel2 extends JPanel {
         if (response == selectedQuestion.correctAnswer) {
             JOptionPane.showMessageDialog(this, "Correct! You may pass.", "Enemy", JOptionPane.INFORMATION_MESSAGE);
             lastAnswerCorrect = true; // Set the flag to true if the answer is correct
+            playSound("src/Sound/correct-83487.wav");
             moveCharacterTwoStepsForward();
         } else {
             JOptionPane.showMessageDialog(this, "Wrong! You shall not pass.", "Enemy", JOptionPane.INFORMATION_MESSAGE);
             lastAnswerCorrect = false; // Set the flag to false if the answer is incorrect
+            playSound("src/Sound/wrong-buzzer-6268.wav");
             character.setX(1);
             character.setY(1);
         }
@@ -136,7 +145,18 @@ public class GamePanel2 extends JPanel {
             character.setY(character.getY() + (lastDirection == UP ? 2 : lastDirection == DOWN ? -2 : 0));
         }
     }
-
+    // Method to play sound effects
+    private void playSound(String soundFile) {
+        try {
+            File file = new File(soundFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
     // Load questions into the list
     private java.util.List<GamePanel2.Question> loadQuestions() {
         java.util.List<GamePanel2.Question> questions = new ArrayList<>();

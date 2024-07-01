@@ -59,22 +59,22 @@ public class GamePanel extends JPanel {
                     case KeyEvent.VK_UP:
                         character.moveUp();
                         lastDirection = UP;
-                        playSound("src/sound_1.wav");
+                        playSound("src/Sound/sound_1.wav");
                         break;
                     case KeyEvent.VK_DOWN:
                         character.moveDown();
                         lastDirection = DOWN;
-                        playSound("src/sound_1.wav");
+                        playSound("src/Sound/sound_1.wav");
                         break;
                     case KeyEvent.VK_LEFT:
                         character.moveLeft();
                         lastDirection = LEFT;
-                        playSound("src/sound_1.wav");
+                        playSound("src/Sound/sound_1.wav");
                         break;
                     case KeyEvent.VK_RIGHT:
                         character.moveRight();
                         lastDirection = RIGHT;
-                        playSound("src/sound_1.wav");
+                        playSound("src/Sound/sound_1.wav");
                         break;
                 }
 
@@ -110,10 +110,12 @@ public class GamePanel extends JPanel {
         if (response == selectedQuestion.correctAnswer) {
             JOptionPane.showMessageDialog(this, "Correct! You may pass.", "Enemy", JOptionPane.INFORMATION_MESSAGE);
             lastAnswerCorrect = true; // Set the flag to true if the answer is correct
+            playSound("src/Sound/correct-83487.wav");
             moveCharacterTwoStepsForward();
         } else {
             JOptionPane.showMessageDialog(this, "Wrong! You shall not pass.", "Enemy", JOptionPane.INFORMATION_MESSAGE);
             lastAnswerCorrect = false; // Set the flag to false if the answer is incorrect
+            playSound("src/Sound/wrong-buzzer-6268.wav");
             character.setX(1);
             character.setY(1);
         }
