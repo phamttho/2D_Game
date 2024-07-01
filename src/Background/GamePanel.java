@@ -127,6 +127,7 @@ public class GamePanel extends JPanel {
             remainingHearts--; // Decrease the number of remaining hearts
             if (remainingHearts <= 0) {
                 // Game over logic here (e.g., reset the game or end it)
+                JOptionPane.showMessageDialog(this, "Game over.", "Enemy", JOptionPane.INFORMATION_MESSAGE);
                 gameMenu.showMenu();
                 JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(GamePanel.this);
                 topFrame.dispose();
