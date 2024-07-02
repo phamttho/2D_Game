@@ -35,8 +35,8 @@ public class GameMenu extends JFrame {
         // Create buttons
 
         JButton startButton = new JButton("Start");
-        JButton playAsBanana = new JButton("Play as banana");
-        JButton playAsEggplant = new JButton("Play as eggplant");
+        JButton playAsBanana = new JButton("Play as Banana");
+        JButton playAsStrawberry = new JButton("Play as Strawberry");
         JButton playAsRaspberry = new JButton("Play as Raspberry ");
 
         // Set button bounds (x, y, width, height)
@@ -48,13 +48,13 @@ public class GameMenu extends JFrame {
         startButton.setBounds(centerX, centerY - 100, buttonWidth, buttonHeight);
         playAsBanana.setBounds(centerX, centerY - 40, buttonWidth, buttonHeight);
         playAsRaspberry.setBounds(centerX, centerY + 20, buttonWidth, buttonHeight);
-        playAsEggplant.setBounds(centerX, centerY + 80, buttonWidth, buttonHeight);
+        playAsStrawberry.setBounds(centerX, centerY + 80, buttonWidth, buttonHeight);
 
         // Add buttons to the panel
         backgroundPanel.add(startButton);
         backgroundPanel.add(playAsBanana);
         backgroundPanel.add(playAsRaspberry);
-        backgroundPanel.add(playAsEggplant);
+        backgroundPanel.add(playAsStrawberry);
 
         // Set up button actions (you can customize these as needed)
 
@@ -75,10 +75,10 @@ public class GameMenu extends JFrame {
                 JOptionPane.showMessageDialog(null, "Character changed to: " + currentCharacter);
             }
         });
-        playAsEggplant.addActionListener(new ActionListener() {
+        playAsStrawberry.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentCharacter = "eggplant";
+                currentCharacter = "strawberry";
                 JOptionPane.showMessageDialog(null, "Character changed to: " + currentCharacter);
             }
         });

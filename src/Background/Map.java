@@ -25,7 +25,7 @@ public class Map implements ImageObserver {
         this.tileSize = tileSize;
         this.map = predefinedMap;
         this.mainCharacter = mainCharacter;
-        this.ImgStrawbery = new ImageIcon("src/strawbery.png").getImage(); // Update the path to your image
+        this.ImgStrawbery = new ImageIcon("src/eggplant.png").getImage(); // Update the path to your image
         this.BackgroundMap1 = new ImageIcon("src/MapBackground.png").getImage();
         this.Bricks = new ImageIcon("src/bricks.png").getImage();
         this.Door1 = new ImageIcon("src/door1.png").getImage();

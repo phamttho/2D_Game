@@ -220,7 +220,7 @@ public class BattleGame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (mainCharacter.isTheWinner()) {
-                    JOptionPane.showMessageDialog(null, "Congratulation, you won the game!!!");
+                    JOptionPane.showMessageDialog(null, "Bravo, you have recovered the relic! Peace and prosperity will reign in the world.!!!");
                     ((Timer) e.getSource()).stop();
                     new GameMenu().setVisible(true); // Replace with your image path
                     dispose(); // Close the game window
